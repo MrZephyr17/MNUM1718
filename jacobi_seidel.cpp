@@ -28,7 +28,7 @@ double fw(double cw, double cx, double cy, double cz, double x, double y, double
 
 vector<double> gaussJacobi(const vector<vector<double> > &a, const vector<double> &b)
 {
-	double x = 2.83865, y = 2.22131, z = 4.17630, w = -3.84236;
+	double x = 0.25, y = 0.25, z = 0.25, w = 0.25;
 	double xAnt, yAnt, zAnt;
 	double cw1, cx1, cy1, cz1, cw2, cx2, cy2, cz2, cx3, cy3, cz3, cw3, cx4, cy4, cz4, cw4, s1, s2, s3, s4;
 	vector<double> sol(a.size());
@@ -54,18 +54,18 @@ vector<double> gaussJacobi(const vector<vector<double> > &a, const vector<double
 	cz4 = a[3][2];
 	cw4 = a[3][3];
 
-	for(int i=0;i<10;i++){
+	for(int i=0;i<2;i++){
 		xAnt = x;
 		x = fx(cw1, cx1, cy1, cz1, w, y, z, s1);
 		yAnt = y;
 		y = fy(cw2, cx2, cy2, cz2, w, xAnt, z, s2);
 		zAnt = z;
-		z = fz(cw3, cx3, cy3, cz3, w, x, yAnt, s3);
-		w = fw(cw4, cx4, cy4, cz4, x, y, zAnt, s4);
+		z = fz(cw3, cx3, cy3, cz3, w, xAnt, yAnt, s3);
+		w = fw(cw4, cx4, cy4, cz4, xAnt, yAnt, zAnt, s4);
 
 		cout << "x: " << x << "\t y:" << y << "\t z: " << z << "\t w:" << w << endl;
 	}
-	
+
 	sol.at(0) = x;
 	sol.at(1) = y;
 	sol.at(2) = z;
@@ -77,7 +77,7 @@ vector<double> gaussJacobi(const vector<vector<double> > &a, const vector<double
 
 vector<double> gaussSeidel(const vector<vector<double> > &a, const vector<double> &b)
 {
-	double x = 2.83865, y = 2.22131, z = 4.17630, w = -3.84236;
+	double x = 0.25, y = 0.25, z = 0.25, w = 0.25;
 	double cw1, cx1, cy1, cz1, cw2, cx2, cy2, cz2, cx3, cy3, cz3, cw3, cx4, cy4, cz4, cw4, s1, s2, s3, s4;
 	vector<double> sol(a.size());
 
@@ -130,29 +130,29 @@ int main()
 
 	//Colocar valores, ultima coluna significa o vetor B
 	//dependendo da situacao, pode ser necessaria pivotagem
-	matrix.at(0).at(0) = 6.0;
-    matrix.at(0).at(1) = 0.5;
-	matrix.at(0).at(2) = 3.0;
-	matrix.at(0).at(3) = 0.25;
-	b.at(0) = 25.0;
-	matrix.at(1).at(0) = 1.2;
-	matrix.at(1).at(1) = 3.0;
-	matrix.at(1).at(2) = 0.25;
-	matrix.at(1).at(3) = 0.2;
-	b.at(1)= 10.0;
+	matrix.at(0).at(0) = 4.5;
+  matrix.at(0).at(1) = -1.0;
+	matrix.at(0).at(2) = -1.0;
+	matrix.at(0).at(3) = 1.0;
+	b.at(0) = 1.0;
+	matrix.at(1).at(0) = -1.0;
+	matrix.at(1).at(1) = 4.5;
+	matrix.at(1).at(2) = 1.0;
+	matrix.at(1).at(3) = -1.0;
+	b.at(1)= -1.0;
 	matrix.at(2).at(0) = -1.0;
-	matrix.at(2).at(1) = 0.25;
-	matrix.at(2).at(2) = 4.0;
-    matrix.at(2).at(3) = 2.0;
-	b.at(2) = 7.0;
+	matrix.at(2).at(1) = 2.0;
+	matrix.at(2).at(2) = 4.5;
+  matrix.at(2).at(3) = -1.0;
+	b.at(2) = -1.0;
 	matrix.at(3).at(0) = 2.0;
-	matrix.at(3).at(1) = 4.0;
-	matrix.at(3).at(2) = 1.0;
-	matrix.at(3).at(3) = 8.0;
-	b.at(3) = -12.0;
+	matrix.at(3).at(1) = -1.0;
+	matrix.at(3).at(2) = -1.0;
+	matrix.at(3).at(3) = 4.5;
+	b.at(3) = 0.0;
 
-	solutions = gaussSeidel(matrix, b);
-	//solutions = gaussJacobi(matrix, b);
+	//solutions = gaussSeidel(matrix, b);
+	solutions = gaussJacobi(matrix, b);
 
 	return 0;
 }
