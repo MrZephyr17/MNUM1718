@@ -3,7 +3,7 @@
 #include <iomanip>
 
 using namespace std;
-
+ 
 double g(double t, double T){
   return -0.25*(T-64);
 }
