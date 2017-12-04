@@ -61,7 +61,6 @@ vector<double> gauss(const vector<vector<double> > &a, const vector<double> &b)
 
 	cout << "Metodo de Gauss" << endl << endl;
 
-
 	vector<vector<double> > a1(a.size(),vector<double>(a.size()+1));
 	int n = a.size();
 	vector<double> solutions(n);
@@ -75,7 +74,7 @@ vector<double> gauss(const vector<vector<double> > &a, const vector<double> &b)
 				a1.at(i).at(j)=a.at(i).at(j);
 		}
 
-		for (int dg = 0; dg < n; dg++) {
+	for (int dg = 0; dg < n; dg++) {
 		for (int col = dg + 1; col <= n; col++)
 			a1.at(dg).at(col) /= a1.at(dg).at(dg);
 
@@ -120,11 +119,11 @@ vector<double> externa(const vector<vector<double> > &a, const vector<double> &b
 	for(int i=0;i<DB.size();i++)
 		DB.at(i)=db-multiplyMatrixVec(DA,solutions).at(i);
 
-		vector<double> res = gauss(a,DB);
+	vector<double> res = gauss(a,DB);
 
-		printVector(res);
+	printVector(res);
 
-		return res;
+	return res;
 
 }
 
@@ -143,13 +142,6 @@ vector<double> interna(const vector<vector<double> > &a, const vector<double> &b
 
 	return res;
 }
-
-
-
-
-
-
-
 
 
 int main()
