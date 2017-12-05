@@ -17,6 +17,10 @@ double f1(double x, double y)
 	return x*x + y*y;
 }
 
+double f2(double t,double x){
+  return sin(2.0*x) + sin (2.0*t);
+}
+
 
 double runge_kutta2(double f(double,double), double h, double x0, double y0, int numIt){
 
@@ -40,14 +44,21 @@ double runge_kutta4(double f(double,double), double h, double x0, double y0, int
 
     for(int i=0;i<numIt;i++){
 
+      cout << x << endl;
+      cout << y << endl;
+
         delta1 = h*f(x,y);
         delta2 = h*f(x+h/2,y+delta1/2);
         delta3 = h*f(x+h/2,y+delta2/2);
-        delta4 = h*f(x+h/2,y+delta3);
+        delta4 = h*f(x+h,y+delta3);
 
         y+=delta1/6 + delta2/3 +delta3/3 + delta4/6; 
         x+=h;
     }
+
+
+      cout << x  << endl;
+      cout << y << endl;
 
     return y;
 }
@@ -102,10 +113,10 @@ int main(){
 
   cout << "Error: " << runge_kutta2_err(g,0.5,4.0,0.0,2) << endl;
 
-  cout << endl << "Runge-Kutta4 method" << endl << endl << "Result: " <<  runge_kutta4(g,0.5,4.0,0.0, 2) << endl;
+  cout << endl << "Runge-Kutta4 method" << endl << endl << "Result: " <<  runge_kutta4(f2,0.125,1.0,1.0,4) << endl;
 
-  cout << "Convergence: " << runge_kutta4_conv(g,0.5,4.0,0.0,2) << endl;
+ // cout << "Convergence: " << runge_kutta4_conv(g,0.5,4.0,0.0,2) << endl;
 
-  cout << "Error: " << runge_kutta4_err(g,0.5,4.0,0.0,2) << endl;
+  //cout << "Error: " << runge_kutta4_err(g,0.5,4.0,0.0,2) << endl;
 
 }
