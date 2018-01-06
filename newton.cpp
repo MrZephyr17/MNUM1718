@@ -6,7 +6,7 @@ using namespace std;
 
 double f(double x)
 {
-	return x*x - 4;
+	return x * x - 4;
 }
 
 double diffF(double x)
@@ -14,33 +14,32 @@ double diffF(double x)
 	return 2 * x;
 }
 
-void newton()
+double f1(double x)
 {
-	double x1=3, x2;
-  const double prec=0.001;
-  const int OUT_PREC = 5;
-  int counter=0;
-
-  cout << fixed << setprecision(OUT_PREC);
-
-	do
-	{
-		if (counter > 0)
-			x1 = x2;
-
-		x2 = x1 - f(x1) / diffF(x1);
-		counter++;
-
-	} while (abs(x2-x1) > prec);
-
-	cout << "Numero iteracoes: " << counter << endl;
-	cout << "x = " << x2 << endl;
+	return (x - 3.7) + pow(cos((x + 1.2)), 3);
 }
 
+double diffF1(double x)
+{
+	return 1 - 3 * pow(cos(x + 1.2), 2) * sin(x + 1.2);
+}
+
+void newton(double f(double), double diff(double), double x, int numIt)
+{
+	for (int i = 0; i < numIt; ++i)
+	{
+		x -= f(x) / diffF(x);
+
+		cout << "x = " << x << endl;
+	}
+}
 
 int main()
 {
-  newton();
+	const int OUT_PREC = 5;
+	cout << fixed << setprecision(OUT_PREC);
 
-  return 0;
+	newton(f1, diffF1, 3.8, 1);
+
+	return 0;
 }

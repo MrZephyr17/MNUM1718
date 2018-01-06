@@ -7,46 +7,44 @@ using namespace std;
 //Function
 double f(double x)
 {
-  return x*x - 4;
+  return x * x - 4;
 }
 
-void bissection()
+double f1(double x)
 {
-  double a = 0, b = 5;
+  return x * x * x - 10 * sin(x) + 2.8;
+}
+
+void bissection(double f(double), double a, double b, int numIt)
+{
   double m;
-  const double precision = 0.001;
-  const int OUT_PREC = 5;
   int counter = 0;
 
-  cout << fixed << setprecision(OUT_PREC);
-
-  //Stopping criterium -> absolute precision
-  while (!(abs(a - b)<precision))
+  for (int i = 0; i < numIt; ++i)
   {
     m = (a + b) / 2.0;
 
-    if (f(a)*f(m) >= 0)
+    if (f(a) * f(m) >= 0)
       a = m;
     else
       b = m;
 
     cout << "|a - b| = " << abs(a - b) << endl;
+    cout << "a = " << a << endl;
+    cout << "b = " << b << endl;
+    cout << "m = " << m << endl;
 
     counter++;
   }
-
-  cout << "a = " << a << endl;
-  cout << "b = " << b << endl;
-
-  cout << "Number of iterations: " << counter << endl;
-
-  cout << "Aproximation of the root in the given interval (precision= " << precision << "): " << m << endl;
-
 }
 
 int main()
 {
-  bissection();
+  const int OUT_PREC = 5;
+
+  cout << fixed << setprecision(OUT_PREC);
+
+  bissection(f1, 1.5, 4.2, 3);
 
   return 0;
 }

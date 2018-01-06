@@ -7,47 +7,39 @@ using namespace std;
 //Function
 double f(double x)
 {
-  return x*x - 4;
+	return x * x - 4;
 }
 
-void falsePosition()
+double f1(double x)
 {
-	double a = 0, b = 10;
-	double r,prevR;
-  int const OUT_PREC = 5;
-	double const precision = 0.001;
-	int counter = 0;
-
-  cout << fixed << setprecision(OUT_PREC);
-
-	do
-	{
-		prevR = (a*f(b) - b*f(a)) / (f(b) - f(a));
-
-		if (f(a)*f(prevR) < 0)
-			b = prevR;
-		else
-			a = prevR;
-
-		cout << "|a - b| = " << abs(a - b) << endl;
-
-		r = (a*f(b) - b*f(a)) / (f(b) - f(a));
-		counter++;
-	} while (abs(prevR - r) > precision);
-
-	cout << "a = " << a << endl;
-	cout << "b = " << b << endl;
-
-	cout << "Number of iterations: " << counter << endl;
-
-	cout << "Aproximation of the root in the given interval (precision= " << precision << "): " << r << endl;
-
+	return pow(x, 7) + 0.5 * x - 0.5;
 }
 
+void falsePosition(double f(double x), double a, double b, int numIt)
+{
+	double r = 0.656044;
+
+	for (int i = 0; i < numIt; ++i)
+	{
+		if (f(a) * f(r) < 0)
+			b = r;
+		else
+			a = r;
+
+		r = (a * f(b) - b * f(a)) / (f(b) - f(a));
+
+		cout << "a = " << a << endl;
+		cout << "b = " << b << endl;
+		cout << "r = " << r << endl;
+	}
+}
 
 int main()
 {
-  falsePosition();
+	int const OUT_PREC = 5;
+	cout << fixed << setprecision(OUT_PREC);
 
-  return 0;
+	falsePosition(f1, 0.0, 0.8, 3);
+
+	return 0;
 }

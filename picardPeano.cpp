@@ -5,16 +5,10 @@
 using namespace std;
 
 //Funcao
-/*double f(double x)
+double f(double x)
 {
 	return x - 2 * log(x) - 5;
 }
-
-double d_f(double x)
-{
-	return 1 - 2 / x;
-}*/
-
 
 //Formulacao de picardPeano
 double g(double x)
@@ -22,35 +16,27 @@ double g(double x)
 	return 2 * log(x) + 5;
 }
 
-double d_g(double x)
+double g1(double x)
 {
-	return 2 / x;
+	return pow(4 * x * x * x - x + 1, 0.25);
 }
 
-void picardPeano()
+void picardPeano(double g(double), double guess, int numIt)
 {
-  double guess = 9; //guess inicial
-	double next_guess = g(guess);
-  double const precision = pow(10, -4);
-	int i = 1;
-
-	while ((abs(next_guess - guess)) > precision)
+	for (int i = 0; i < numIt; ++i)
 	{
-		guess = next_guess;
-		next_guess = g(guess);
+		guess = g(guess);
 
-		i++;
+		cout << "x = " << guess << endl;
 	}
-	cout << "Numero de iteracoes: " << i << endl;
-	cout << "x = " << next_guess << endl;
-
 }
-
-
 
 int main()
 {
-  picardPeano();
+	const int OUT_PREC = 5;
+	cout << fixed << setprecision(OUT_PREC);
 
-  return 0;
+	picardPeano(g1, 4.0, 2);
+
+	return 0;
 }
