@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void printMatrix(const vector<vector<double>> &m)
+void printMatrix(const vector<vector<double> > &m)
 {
 	cout << "Matriz" << endl;
 
@@ -38,12 +38,12 @@ void printVector(const vector<double> &sol)
 	cout << endl;
 }
 
-vector<double> gauss(const vector<vector<double>> &a, const vector<double> &b)
+vector<double> gauss(const vector<vector<double> > &a, const vector<double> &b)
 {
 	cout << "Metodo de Gauss" << endl
 		 << endl;
 
-	vector<vector<double>> a1(a.size(), vector<double>(a.size() + 1));
+	vector<vector<double> > a1(a.size(), vector<double>(a.size() + 1));
 	int n = a.size();
 	vector<double> solutions(n);
 
@@ -88,7 +88,7 @@ vector<double> gauss(const vector<vector<double>> &a, const vector<double> &b)
 
 int main()
 {
-	vector<vector<double>> matrix(3, vector<double>(3));
+	vector<vector<double> > matrix(3, vector<double>(3));
 	vector<double> b(matrix.size());
 	vector<double> solutions(matrix.size());
 

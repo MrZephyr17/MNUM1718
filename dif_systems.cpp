@@ -28,6 +28,11 @@ double f1(double x, double y, double z)
     return z;
 }
 
+double f2(double x, double y, double z)
+{
+    return 1 + x * x + x * z;
+}
+
 double euler_sist(double f(double, double, double), double g(double, double, double), double h, double x, double y, double z, int numIt)
 {
     cout << "Euler method" << endl;
@@ -152,9 +157,9 @@ int main()
 
     // rk4_sist(f,g,0.25,0.5,20.0,2.0,2);
 
-    euler_sist(f1, g1, 0.25, 0.0, 0.0, 1.0, 2);
+    euler_sist(f1, f2, 0.5, 0.0, 1.0, 2.0, 2);
 
-    rk4_sist(f1, g1, 0.25, 0.0, 0.0, 1.0, 2);
+    rk4_sist(f1, f2, 0.5, 0.0, 1.0, 2.0, 2);
 
     return 0;
 }
